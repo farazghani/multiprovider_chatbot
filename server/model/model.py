@@ -16,16 +16,18 @@ class Userresponse(BaseModel):
      jwt: Optional[str] = None
      success: bool
      error: Optional[str] = None
-
     
 
 class ChatMessage(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     role: Literal[
         "system",
         "user",
         "assistant",
         "tool"
     ]
+    
+    conversation_id: str
     content: str
     created_At: datetime = Field(default_factory=datetime.utcnow)
     provider: Optional[str] = None
